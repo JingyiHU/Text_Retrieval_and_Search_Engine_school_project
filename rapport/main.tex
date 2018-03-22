@@ -1,0 +1,682 @@
+\documentclass[a4paper]{elsarticle}
+
+%% Language and font encodings
+\usepackage[frenchb]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+
+\usepackage{xcolor}
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+\usepackage{listings}
+\lstdefinestyle{java}{language=Java,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+\lstdefinestyle{sql}{language=SQL}
+
+\lstdefinestyle{xml}{language=XML,
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  morekeywords={dependency,groupId,artifactId,version}
+}
+\lstset{style=java,
+  literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  aboveskip={1.3\baselineskip},
+  basicstyle=\small\ttfamily\linespread{4},
+  columns=flexible,
+  extendedchars=true,
+  frame=single,
+  identifierstyle=\color{black},
+  numbers=left,
+  numberstyle=\scriptsize,
+  prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+  showstringspaces=false,
+  upquote=true
+}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+% https://tex.stackexchange.com/questions/312004/french-with-elsarticle-cls
+\usepackage{regexpatch}
+\makeatletter
+\xpatchcmd{\abstract}{Abstract}{\abstractname}{}{}
+\regexpatchcmd*{\@makecaption}{:}{\cA:}{}{}
+\xpatchcmd*{\keyword}{Keywords}{Mots cl\'es}{}{}
+\regexpatchcmd*{\keyword}{:}{\cA:}{}{}
+\xpatchcmd{\printFirstPageNotes}
+  {Email addresses}
+  {Adresses email}
+  {}{}
+\xpatchcmd{\printFirstPageNotes}
+  {Email address}
+  {Adresse email}
+  {}{}
+\regexpatchcmd*{\printFirstPageNotes}{:}{\cA:}{}{}
+\regexpatchcmd*{\ps@pprintTitle}% <cmd>
+  {.*}% <search>
+  {}% <replace>
+  {}{}% <succes><failure>
+\makeatother
+\usepackage{silence}
+\WarningFilter{frenchb.ldf}{Figure}
+
+\usepackage{xspace}
+
+% http://www.texample.net/tikz/examples/assignment-structure/
+\usepackage{tikz}
+\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
+    decorations.pathreplacing,decorations.pathmorphing,shapes,%
+    matrix,shapes.symbols}
+
+\tikzset{
+>=stealth',
+  punktchain/.style={
+    rectangle, 
+    rounded corners, 
+    % fill=black!10,
+    draw=black, very thick,
+    text width=20em, 
+    minimum height=3em, 
+    text centered, 
+    on chain},
+  line/.style={draw, thick, <-},
+  element/.style={
+    tape,
+    top color=white,
+    bottom color=blue!50!black!60!,
+    minimum width=8em,
+    draw=blue!40!black!90, very thick,
+    text width=10em, 
+    minimum height=3.5em, 
+    text centered, 
+    on chain},
+  every join/.style={->, thick,shorten >=1pt},
+  decoration={brace},
+  tuborg/.style={decorate},
+  tubnode/.style={midway, right=2pt},
+}
+
+
+
+\title{LO17 - Indexation et recherche d'information\\Traitement d'une requête en langage naturel}
+\author{Maurice QUACH - Jingyi HU}
+
+\begin{document}
+\begin{frontmatter}
+\address{Université de Technologie de Compiègne, France}
+
+\begin{abstract}
+Dans le cadre du projet d’indexation et recherche d’information pour l’UV LO17, nous présentons dans ce rapport le travail réalisé sur l'analyse morphologique, lexicale et syntaxique.
+
+Nous rappelons que le projet a pour objectif l'indexation d'un corpus de documents et la réalisation d'un moteur de recherche acceptant des requêtes en langage naturel.
+
+Dans le premier rapport, nous avons abordé la procédure de traitement des données initiales dans le but d'en extraire les informations pertinentes et d'indexer ces documents par rapport à leur contenu et à leurs métadonnées.
+
+Dans ce second rapport, nous présentons notre approche pour le traitement des requêtes en langage naturel. Dans un premier temps, pour la gestion des erreurs de typographie et d'orthographe, l'analyse morphologique. Dans un second temps, le traitement de la requête en langage naturel. Enfin, nous allons aborder quelques aspects d'ingénierie qui nous ont aidé à mener notre projet à bien.
+\end{abstract}
+\end{frontmatter}
+
+
+\section{Analyse morphologique} \label{analysemorphologique}
+
+\subsection{Importance du contexte dans l'interprétation}
+
+La requête est effectuée sur un corpus de documents bien défini qui concerne l'actualité technologique. Cela nous permet de contextualiser la requête par rapport au contenu des documents.
+
+On observe tout d'abord une contextualisation sémantique qui se fait naturellement. Par exemple, le mot \og avocat \fg{} désigne un fruit dans un contexte alimentaire et désigne un métier dans un contexte légal. De la même manière, dans le contexte de l'actualité technologique, le mot \og CPU \fg{} désignera \og Central Processing Unit \fg{} plutôt que \og Communist Party of Ukraine \fg{}. La contextualisation sémantique n'a pas d'influence dans ce cadre car nous adoptons une approche purement morphologique. 
+
+Et on observe aussi une contextualisation spatiale, l'ensemble des mots présents est affecté par le choix du corpus documentaire. Si la thématique principale du corpus est le violon, \og violent \fg{} ne sera probablement pas présent mais \og violon \fg{} le sera certainement. Si le corpus a pour sujet l'influence de la violence sur la société, la situation inverse sera vraie.
+
+La contextualisation spatiale nous permet de cibler la requête de l'utilisateur de manière plus précise. Par exemple, le mot erroné \og violen \fg{} peut être compris comme \og violon \fg{} ou \og violent \fg{}. Le contexte a donc une influence considérable dans l'interprétation de la requête.
+
+\subsection{Problème}
+
+Un utilisateur réalisant une requête en langage naturel est susceptible de faire des fautes d'orthographe et des fautes de frappe. Afin d'interpréter correctement la requête, il est donc essentiel de corriger ces fautes afin d'avoir une requête finale qui soit cohérente par rapport à l'intention de l'utilisateur.
+
+De plus, les mots utilisés par l'utilisateur ne sont pas nécessairement présents dans le corpus documentaire.
+
+Il s'agit donc de tenir compte de ces deux facteurs et d'interpréter la requête par rapport au contexte du corpus documentaire.
+
+\subsection{Approche globale}
+
+L'approche globale a pour objectif d'obtenir un équilibre entre temps de calcul et précision de la correction. Des méthodes de calcul moins coûteuses sont tentées dans un premier temps. Le calcul de la distance d'édition est utilisée en dernier recours. Nous adoptons une approche en cascade :
+
+\begin{itemize}
+\item Correspondance directe : si le mot est présent dans le dictionnaire, on lui fait correspondre le lemme calculé précedemment
+\item Recherche par préfixe identique \cite{morizetmahoudeaux2016lo17}
+\item Distance d'édition
+\end{itemize}
+
+\subsection{Recherche par préfixe identique}
+
+Pour l'algorithme de recherche par préfixe identique, nous avons à disposition 3 paramètres :
+\begin{itemize}
+\item Nombre minimal de lettres en commun : 4
+\item Nombre minimal de lettres : 3
+\item Différence maximale de longueur : 4
+\end{itemize}
+
+Après avoir réalisé des tests, nous avons décidé de conserver les valeurs ci-dessous. Les valeurs actuelles permettent de résoudre les cas les plus simples par cet algorithme et de passer à l'algorithme de Levenshtein en cas de doute. La taille du corpus étant raisonnable, cela nous permet de nous reposer de manière plus importante sur l'algorithme de Levenshtein et par ce biais améliorer la précision de nos résultats notamment pour les transpositions.
+
+\subsection{Distance d'édition}
+
+Nous divisons la requête de l'utilisateur en tokens et adoptons une approche morphologique sur ces tokens pour leur faire correspondre le lemme adapté. Afin de déterminer le lemme le plus adapté, nous calculons la distance de Levenshtein \cite{levenshtein1966binary} pour chaque lemme existant et choisissons le plus proche.
+
+\subsubsection{Coût de calcul important}
+
+Tout d'abord, l'approche globale utilisée réduit l'impact du coût de calcul. En effet, on minimise l'utilisation de l'algorithme.
+
+La complexité algorithmique de l'algorithme de Levenshtein est de $O(nm)$. En ajoutant un maximum à la distance de Levenshtein, il est possible de réduire cette complexité à $O(max * min(n, m))$. Dans notre cas, nous n'avons pas eu de problème de performance. Nous avons donc gardé l'implémentation naïve.
+
+\subsubsection{Sensibilité aux transpositions}
+
+La distance de Levenshtein est sensible aux transpositions. Par exemple, la distance de Levenshtein entre \og distance \fg{} et \og distnace \fg{} est de 2. La distance de Damerau-Levenshtein \cite{damerau1964technique} résout ce problème en ajoutant l'opération de transposition en plus des opérations d'insertion, suppression et substitution. L'exemple précédent a donc une distance de Damerau-Levenshtein égale à 1.
+
+\subsubsection{Score de discrimination}
+
+Nous proposons une nouvelle approche pour remédier au problème des transpositions. Damerau-Levenshtein réduit la distance entre les mots avec lettres adjacentes transposées. L'approche du score de discrimination est opposée car elle fournit une distance insensible à l'ordre des lettres entre deux mots. La combinaison du score de discrimination avec la distance de Levenshtein résout le problème de sensibilité aux transpositions par compensation.
+
+\paragraph{Calcul}
+
+Soit $A$ la séquence des entiers représentant l'ensemble des caractères (encodage). Soit $C(v, x)$ le nombre d'occurences de $x$ dans le vecteur $v$. Soit deux chaînes de caractères $s_{1}$ et $s_{2}$ de longueur $n_{1}$ et $n_{2}$ représentés par les vecteurs $v_{1}$ et $v_{2}$ dans $A^{n_{1}}$ et $A^{n_{2}}$. Soit $D(v_{1}, v_{2})$ le score de discrimination entre les chaînes de caractères $s_{1}$ et $s_{2}$.
+
+On définit $\mathcal{C}(v)$ le vecteur du nombre d'occurences de chaque élément de $A$ dans $v$.
+
+\begin{align*}
+  \mathcal{C} \colon A^{n} &\to \mathbb{N}^{\left\vert{A}\right\vert} \\
+  v &\mapsto (C(v, A_{1}), \ldots, C(v, A_{\left\vert{A}\right\vert})).
+\end{align*}
+
+On définit ensuite le score de discrimination.
+
+\begin{align*}
+  \mathcal{D} \colon (A^{n_{1}}, A^{n_{2}}) &\to \mathbb{R} \\
+  (v_{1}, v_{2}) &\mapsto \norm{\mathcal{C}(v_{1}) - \mathcal{C}(v_{2})}.
+\end{align*}
+
+\subsubsection{Distance de Levenshtein discriminée}
+
+On définit la distance de Levenshtein discriminée par la somme de la distance de Levenshtein et du score de discrimination. Pour montrer la résilience de l'algorithme face aux transpositions, nous allons comparer Levenshtein, le score de discrimination, Levenshtein discriminé et Damerau-Leenshtein.
+
+\begin{center}
+\begin{tabular}{ | l | l | r | r | r | r | }
+  \hline
+  $s_{1}$ & $s_{2}$ & Levenshtein & Discrimination & Levenshtein discriminé & Damerau-Levenshtein \\ \hline
+  étrangesr & étranger & 1 & 1 & 2 & 1 \\ \hline
+  étrangesr & étrangers & 2 & 0 & 2 & 1 \\ \hline
+  étrangesr & étranges & 1 & 1 & 2 & 1 \\ \hline
+\end{tabular}
+\end{center}
+
+De la même manière que Damerau-Levenshtein, on observe que les scores de Levenshtein discriminé sont égaux pour les trois exemples. L'algorithme de Levenshtein seul ne permet pas d'identifier la transposition pour les mots \og étrangesr \fg{} et \og étrangers \fg{}.
+
+Il est important d'observer que le score de discrimination attribue un coût plus élevé aux opérations de substitution.
+
+\begin{center}
+\begin{tabular}{ | l | l | r | r | r | r | }
+  \hline
+  $s_{1}$ & $s_{2}$ & Levenshtein & Discrimination & Levenshtein discriminé & Damerau-Levenshtein \\ \hline
+  violen & violon & 1 & 1.414 & 2.414 & 1 \\ \hline
+  violen & violent & 1 & 1 & 2 & 1 \\ \hline
+  violen & viole & 1 & 1 & 2 & 1 \\ \hline
+\end{tabular}
+\end{center}
+
+\section{Traitement de la requête en langage naturel}
+
+\subsection{Approche globale}
+
+Pour l'analyse lexicale et syntaxique, nous adoptons une approche en plusieurs étapes.
+
+\begin{center}
+\begin{tikzpicture}
+  [node distance=.8cm,
+  start chain=going below,]
+     \node[punktchain, join] (nat) {Requête en langage naturel};
+     \node[punktchain, join] (interp)      {Requête interprétée et normalisée};
+     \node[punktchain, join] (sql)      {Arbre SQL étiqueté};
+     \node[punktchain, join] (sqlfin)      {Requête SQL développée};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Interprétation et normalisation}
+
+L'interprétation et normalisation est la première étape de notre processus d'analyse. L'objectif de cette étape est tout d'abord d'identifier l'intention et les paramètres de la requête puis de normaliser les paramètres.
+
+Dans un premier temps, la requête est divisée en mots par identification des séparateurs (espaces, virgules, ponctuation \ldots). Les lettres des mots sont transformées en minuscules. On utilise aussi une stoplist pour filtrer les mots non importants.
+
+Dans un second temps, on tokenise les mots de la requête. Le système actuel tokenise sans prise en compte du contexte. Le système peut être étendu afin de prendre en compte l'état actuel du tokenizer, de l'interpréteur et de la position du mot dans la phrase. Cette extension améliorerait la qualité de l'interprétation et la distinction entre mots et mots-clés réservés.
+
+\subsubsection{Types et catégories de Token}
+
+On distingue plusieurs types de tokens :
+\begin{itemize}
+\item REQUEST\_TYPE : type de la requête
+\item REQUEST\_ITEMS : résultat attendu de la requête
+\item REQUEST\_TABLE : espace de recherche de la requête
+\item CONJUNCTION : conjonctions (ET et OU)
+\item WORD : mot
+\end{itemize}
+
+On distingue parmi ces types deux catégories de tokens :
+\begin{itemize}
+\item Mot : WORD
+\item Mots clés : les autres types de token
+\end{itemize}
+
+\subsubsection{Dictionnaire de mots clés}
+
+Un mot clé a plusieurs représentations. Une représentation d'un mot clé est une chaîne de caractères pouvant être interprétée comme le mot clé lors de la tokenisation.
+
+Par exemple, \og fichier \fg{}, \og article \fg{} et \og publication \fg{} sont des représentations du mot clé \og FICHIER \fg{}, un token de type REQUEST\_ITEMS.
+
+\subsubsection{Processus de tokenisation}
+
+Pour transformer une chaîne de caractères en Token, on vérifie tout d'abord si c'est un mot-clé. Pour ce faire, on s'appuie sur l'algorithme de Levenshtein discriminé. On compare la chaîne avec les représentations renseignées dans le dictionnaire des mots-clés. Si le score est infèrieur au seuil, alors on retourne le token représentant ce mot-clé. Dans notre cas, on a utilisé un seuil de $3$.
+
+Dans le cas où ce n'est pas un mot clé, le token est de type WORD. On utilise alors le processus décrit dans la section \ref{analysemorphologique} pour lemmatiser la chaîne de caractères.
+
+\subsubsection{Processus d'interprétation}
+
+Après la tokenisation, on interprète la requête. Une requête interprétée a la structure suivante :
+
+\begin{center}
+REQUEST\_TYPE REQUEST\_ITEMS REQUEST\_TABLE PARAMETRES
+\end{center}
+
+Pour déterminer les éléments REQUEST\_TYPE, REQUEST\_ITEMS et REQUEST\_TABLE, on cherche si des tokens du type correspondants sont présents dans la requête tokenisée. On a alors plusieurs possibilités :
+\begin{itemize}
+\item Il n'y a pas de token correspondant. On choisit alors une valeur par défaut.
+\item Il y a un token correspondant. Ce token est choisi comme valeur.
+\item Il y a plusieurs tokens correspondants. Le token ayant la priorité la plus haute est choisi. Si il y a plusieurs tokens de priorité maximale, alors le premier token rencontré est choisi.
+\end{itemize}
+
+Pour déterminer la valeur de l'élément PARAMETRES, on extrait de la requête tokenisée tous les tokens de type CONJUNCTION et WORD.
+
+Par exemple, la requête \og Les dates des publications sur la biologie et le biomimétisme \fg{} retourne le résultat \og SELECT DATE DATE biolog ET biomimétique \fg{} après interprétation et normalisation.
+
+\begin{itemize}
+\item SELECT est le token de type REQUEST\_TYPE. Il n'y a pas d'indicateur de type de requête et c'est le seul type défini pour le moment.
+\item DATE est le token de type REQUEST\_ITEMS. La représentation du mot-clé DATE \og dates \fg{} est détectée.
+\item DATE est le token de type REQUEST\_TABLE. Cette valeur est inférée de la valeur de REQUEST\_ITEMS. Selon les informations voulues, la table cible va varier.
+\item \og biolog ET biomimétique \fg{} représente les paramètres de la requête.
+\end{itemize}
+
+\subsection{Construction de l'arbre SQL étiqueté}
+
+\`A partir de la requête interprétée et normalisée, on construit un arbre SQL étiqueté. Pour ce faire, nous utilisons Antlr 3, un générateur de parseur LL, pour gérer l'analyse syntaxique.
+
+Au niveau conceptuel, la requête interprétée et normalisée construite précédemment utilise le Domain Specific Language (DSL) que nous définissons et interprétons avec Antlr.
+
+Lors de l'application de la grammaire par Antlr, on applique des étiquettes au noeuds de l'arbre. Le noeud REQUEST\_ITEMS définit les attributs columns (colonnes sélectionnées) et display\_columns (colonnes sélectionnées et agrégats). Le noeud PARAMETERS calcule les attributs param\_count (nombre de paramètres) et intersection (présence ou non d'un ET).
+Les noeuds fils transmettent ces attributs au noeud de la requête REQUEST.
+
+\begin{tikzpicture}[
+    grow=right,
+    level 1/.style={sibling distance=3.5cm,level distance=9cm},
+    edge from parent/.style={<-, very thick,draw=blue!40!black!60, shorten <= 5pt},
+    edge from parent path={(\tikzparentnode.east) -- (\tikzchildnode.west)},
+    kant/.style={text width=2cm, text centered, sloped},
+    every node/.style={text ragged, inner sep=2mm},
+    punkt/.style={rectangle, rounded corners, shade, top color=white, text width=12em,
+    bottom color=blue!50!black!20, draw=blue!40!black!60, very
+    thick }
+    ]
+\node[punkt] [rectangle split, rectangle split, rectangle split parts=5,
+         text ragged]  {
+         \textbf{REQUEST}
+            \nodepart{second}
+            $\text{param\_count : Integer}$
+            \nodepart{third}
+            $\text{intersection : boolean}$
+            \nodepart{fourth}
+            $\text{columns : String}$
+            \nodepart{five}
+            $\text{display\_columns : String}$
+}
+    child {
+        node[punkt] [rectangle split, rectangle split, rectangle split parts=3,
+         text ragged] {
+        	\textbf{PARAMETERS}
+            \nodepart{second}
+            $\text{param\_count : Integer}$
+                  \nodepart{third}
+            $\text{intersection : boolean}$
+        }
+       edge from parent{
+            node[kant, above] {}}
+    }
+    child {
+        node[punkt] {
+        	\textbf{REQUEST\_TABLE}
+        }
+       edge from parent{
+            node[kant, above] {}}
+    }
+    child {
+        node[punkt] [rectangle split, rectangle split, rectangle split parts=3,
+         text ragged] {
+            \textbf{REQUEST\_ITEMS}
+                  \nodepart{second}
+            $\text{columns : String}$
+                  \nodepart{third}
+            $\text{display\_columns : String}$
+        }
+        edge from parent
+            node[kant, above] {}
+    }
+    child {
+        node[punkt] {
+            \textbf{REQUEST\_TYPE}
+        }
+        edge from parent
+            node[kant, above] {}
+    };
+\end{tikzpicture}
+
+Par exemple, considérons la requête interprétée et normalisée \og SELECT DATE DATE biolog ET biomimétique \fg{} correspondant à la requête en langage naturel \og Les dates des publications sur la biologie et le biomimétisme \fg{}. L'arbre SQL retourne
+\begin{itemize}
+\item REQUEST\_TYPE : \og SELECT \fg{}
+\item REQUEST\_ITEMS : \og string\_agg(mot, ',') AS mots, jour, mois, annee, texte.fichier \fg{}
+\item REQUEST\_TABLE : \og FROM date  LEFT JOIN texte ON texte.fichier = date.fichier WHERE \fg{}
+\item REQUEST\_PARAMETERS : \og ((mot = 'biolog') OR (mot = 'biomimétique')) \fg{}
+\end{itemize}
+avec les attributs suivants sur le noeud REQUEST
+\begin{itemize}
+\item param\_count : 2
+\item columns : \og jour, mois, annee, texte.fichier \fg{}
+\item display\_columns : \og string\_agg(mot, ',') AS mots, jour, mois, annee, texte.fichier \fg{}
+\item intersection : true
+\end{itemize}
+
+Il est important de noter que la requête n'est pas encore complète à ce stade.
+
+\subsection{Développement de la requête}
+
+Le développement de la requête est l'étape finale qui produit la requête SQL. L'arbre est parcouru entièrement et la requête SQL est assemblée. Dans un second temps, une phase de post-processing est effectuée sur la requête.
+
+La logique de post-processing actuelle est la suivante : si l'attribut intersection est égal à true, \og "group by " + columns + " having count(distinct mot) >= " + paramCount \fg{} est ajouté à la requête, sinon, \og "group by " + column \fg{} est ajouté. Dans le cas où intersection est vrai, cela a pour effet de grouper les résultats par rapport aux colonnes identifiant les fichiers (clé primaire) et de vérifier que chacun des mots de la requête est présent (opération ET). Dans le cas où intersection est faux, cela a pour effet de grouper les résultats par rapport aux colonnes identifiant les fichiers (clé primaire).
+
+Pour l'instant, le système ne gère pas les requêtes avec des opérateurs ET et OU en même temps.
+Pour améliorer le développement de la requête par rapport aux opérateurs logiques ET et OU, il faudrait tout d'abord ajouter la prise en compte de la précédence sur les paramètres. Puis, utiliser l'arbre ainsi construit pour effectuer une requête supplémentaire lors d'un noeud OU.
+
+Pour la requête \og Les dates des publications sur la biologie et le biomimétisme \fg{}, on aura au final la requête SQL suivante :
+
+\begin{lstlisting}[style=sql]
+SELECT
+   string_agg(mot, ',') AS mots,
+   jour,
+   mois,
+   annee,
+   texte.fichier 
+FROM
+   DATE 
+   LEFT JOIN
+      texte 
+      ON texte.fichier = DATE.fichier 
+WHERE
+   (
+      ( mot = 'biolog' ) 
+      OR 
+      ( mot = 'biomimétique' )
+   )
+GROUP BY
+   jour,
+   mois,
+   annee,
+   texte.fichier 
+HAVING
+   COUNT(DISTINCT mot) >= 2
+\end{lstlisting}
+
+\section{Conclusions et remarques}
+
+\subsection{Analyse morphologique}
+
+L'approche du Levenshtein discriminé attribue un coût plus élevé aux substitutions. Lors de nos tests, nous n'avons pas observé d'impact particulier sur la précision de la lemmatisation. Cependant, les substitutions constituent une part non négligeable des erreurs de typographie \cite{church1991probability}. Il est donc probable que cela dégrade la précision.
+
+Il est intéressant de noter que le calcul du score de discrimination a une complexité algorithmique en $O(n)$. Ainsi, au prix d'une perte de précision lors de la lemmatisation, il est possible de remplacer Levenshtein discriminé par le score de discrimination et avoir un gain de performance considérable (car Levenshtein est en $O(nm)$).
+
+Une autre piste d'amélioration est de remplacer l'algorithme de Levenshtein par celui de Damerau-Levenshtein. D'une part, l'algorithme gère les transpositions. D'autre part, on peut utiliser une variante avec une distance maximale. Cela a pour effet de réduire la complexité algorithmique à $O(max * min(n, m))$. C'est donc une autre piste d'optimisation.
+
+\subsection{Traitement du langage naturel}
+
+L'approche actuelle est particulière car l'interprétation et la normalisation effectue un premier traitement global sans grammaire. Cette première étape tente d'extraire l'intention de la requête. C'est dans un second temps qu'une grammaire ANTLR est utilisée. Cependant, elle est utilisée pour créér un DSL et analyser syntaxiquement la structure des paramètres. Il n'y a dans le processus pas de grammaire qui tente de reconstruire la structure grammaticale de la phrase.
+
+C'est une approche qui a des caractéristiques particulières :
+\begin{itemize}
+\item Flexibilité : toutes les requêtes peuvent être gérées
+\item Structure variable des résultats : la structure des résultats va varier selon la requête
+\item Compréhension limitée : les requêtes très structurées ne sont pas comprises. Par exemple, \og les publications de l'auteur John Doe publiées entre juin 2012 et juillet 2014 \fg{}.
+\end{itemize}
+
+La compréhension limitée provient du fait que la tokenisation dans la phase d'interprétation et normalisation est réalisée de manière non contextuelle. Par conséquent, le processus détruit les sous-structures, notamment par lemmatisation. Une interprétation contextuelle permettrait d'identifier ces sous-structures dans la phrase. Par exemple, \og juin 2012 \fg{} est une date, \og entre date et date \fg{} est un intervale et  \og de l'auteur John Doe \fg{} indique un auteur. Ces sous-structures peuvent ensuite être exploitées afin de générer la requête correspondante.
+
+\section{Ingénierie}
+
+Pour mener à bien le projet, nous nous sommes appuyés sur de l'ingénierie logicielle afin de facilier notre travail. Nous partageons dans cette section les éléments qui nous ont été le plus utile.
+
+\subsection{Maven}
+
+Nous avons réalisé la partie Java et Antlr dans un projet Maven. En particulier, cela a facilité la gestion des dépendences par l'utilisation du pom.xml.
+
+Par exemple, pour ajouter la librairie PostgreSQL, il nous a suffi d'ajouter le code suivant dans notre pom.xml :
+
+\begin{lstlisting}[style=xml]
+<dependency>
+  <groupId>org.postgresql</groupId>
+  <artifactId>postgresql</artifactId>
+  <version>42.1.4</version>
+</dependency>
+\end{lstlisting}
+
+Le téléchargement de la librairie, des sources, l'ajout au build path sont alors effectués automatiquement.
+
+\subsection{Framework de logging}
+
+L'utilisation d'un framework de logging nous a permis d'avoir des logs lisibles de manière aisée.
+Nous avons utilisé l'interface Simple Logging Facade for Java (SLF4J) et le framework logback.
+Grâce à Maven, nous avons simplement eu à ajouter :
+
+\begin{lstlisting}[style=xml]
+<dependency>
+  <groupId>org.slf4j</groupId>
+  <artifactId>slf4j-api</artifactId>
+  <version>1.6.6</version>
+</dependency>
+<dependency>
+  <groupId>ch.qos.logback</groupId>
+  <artifactId>logback-classic</artifactId>
+  <version>1.0.7</version>
+</dependency>
+<dependency>
+  <groupId>ch.qos.logback</groupId>
+  <artifactId>logback-core</artifactId>
+  <version>1.0.7</version>
+</dependency>
+\end{lstlisting}
+
+Les lignes de log résultantes ont alors la forme suivante :
+\begin{verbatim}
+21:21:55.348 [main] DEBUG main.spelling.Lemmatizer - Using direct get
+\end{verbatim}
+
+\subsection{Read Eval Print Loop : REPL}
+
+Dans le cadre de nos tests, nous avons eu à utiliser la console. Le code suivant nous a été très utile pour réaliser des REPL rapidement :
+
+\begin{lstlisting}
+public class GenericREPL {
+  private static final Logger logger = LoggerFactory.getLogger(GenericREPL.class);
+
+  public static void start(Consumer<String> consumer) {
+    try (Scanner scanner = new Scanner(System.in)) {
+      while (true) {
+        logger.info("User input :\n");
+        String input = scanner.nextLine();
+
+        try {
+        	consumer.accept(input);
+        } catch (Throwable t) {
+        	logger.error("An error has occured :", t);
+        }
+      }
+    }
+  }
+}
+\end{lstlisting}
+
+Et l'utilisation se fait de la manière suivante :
+
+\begin{lstlisting}
+GenericREPL.start((input) -> {
+	// Utiliser l'input ici
+});
+\end{lstlisting}
+
+\subsection{Gestion de résultats à structure variable}
+
+La structure des résultats d'une requête varie selon la requête. Il est donc nécessaire de gérer cette variabilité. Notre interface réalise des requêtes asynchrones au serveur et reçoit des résultats sous format JSON. Il est donc nécessaire d'avoir une structure sérialisable. En l'occurence, nous utilisons le framework Jackson pour la sérialisation. Pour pouvoir sérialiser le résultat, nous convertissons le ResultSet en List<Map<String,String>> par l'intermédiaire de la classe suivante :
+
+\begin{lstlisting}
+public class ResultSetUtils {
+  public static List<Map<String, String>> toHashMap(ResultSet resultSet) {
+    List<Map<String, String>> list = new ArrayList<>();
+
+    try {
+      while (resultSet.next()) {
+        Map<String, String> map = new HashMap<>();
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        for(int idx = 1; idx<= resultSetMetaData.getColumnCount(); idx++) {
+          map.put(resultSetMetaData.getColumnLabel(idx), resultSet.getString(idx).trim());
+        }
+
+        list.add(map);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    return list;
+  }
+}
+\end{lstlisting}
+
+\subsection{Lecture de données à partir de fichiers textes}
+
+Dans notre projet, nous avons dû lire des données provenant de fichiers textes à plusieurs reprises (lemmes, stoplist, tokens...). Nous avons donc créé une classe générique qui lit des fichiers textes ligne par ligne :
+
+\begin{lstlisting}
+public class GenericLineReaderUtil {
+  public static <T> T readAndProcess(String file, Function<Stream<String>, T> function)  {
+    T result = null;
+    try {
+      Stream <String> lines = Files.lines(
+        Paths.get(TokensReader.class.getResource(file).toURI())
+      );
+
+      result = function.apply(lines);
+
+      lines.close();
+
+    } catch (Throwable e) {
+      throw new RuntimeException(e);
+    }	
+
+    return result;
+  }
+}
+\end{lstlisting}
+
+Pour une stoplist, l'utilisation se fait de la manière suivante :
+
+\begin{lstlisting}
+GenericLineReaderUtil.readAndProcess("/data/stoplist.txt", (lines) -> {
+  Set<String> stoplist = new HashSet<>();
+  lines.forEach(line -> {
+    String word = line.trim();
+    logger.debug("word :'" + word + "'");
+    stoplist.add(word);
+  });
+
+  return stoplist;
+})
+\end{lstlisting}
+
+\subsection{Serveur HTTP}
+
+Avec la librairie NanoHTTPD, nous avons réalisé une API simple prenant en entrée la requête en langage naturel et renvoyant les résultats en sortie. Nous avons utilisé Maven pour ajouter la librairie :
+
+\begin{lstlisting}[style=xml]
+<dependency>
+  <groupId>org.nanohttpd</groupId>
+  <artifactId>nanohttpd</artifactId>
+  <version>2.2.0</version>
+</dependency>
+\end{lstlisting}
+
+Et nous avons utilisé la classe suivante pour implémenter l'API et le serveur HTTP :
+
+\begin{lstlisting}
+public class HttpApp extends NanoHTTPD {
+  public HttpApp() throws IOException {
+    super(8080);
+    start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
+    System.out.println("\nRunning! Point your browsers to http://localhost:8080/ \n");
+  }
+
+  public static void main(String[] args) {
+    try {
+      new HttpApp();
+    } catch (IOException ioe) {
+      System.err.println("Couldn't start server:\n" + ioe);
+    }
+  }
+
+  @Override
+  public Response serve(IHTTPSession session) {
+    String msg = "";
+    Map<String, String> parms = session.getParms();
+    String query = parms.get("query");
+    if (query != null) {
+      // Utiliser la query
+      // msg += réponse JSON
+    }
+    Response resp = newFixedLengthResponse(msg);
+    resp.setMimeType("application/json");;
+
+    return resp;
+  }
+}
+\end{lstlisting}
+
+\section*{Bibliographie}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{sample}
+
+\end{document}

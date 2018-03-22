@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FILE=$1
+
+echo "Bulletin : `grep -o '<bulletin>' $1 | wc -l`"
+echo "Images : `grep -o '<image>' $1 | wc -l`"
+echo "Dates :"
+cat $1 | sed -rn 's/<date>(.+?)<\/date>/\1/p' | sort | uniq -c | sort -bgr
+echo "Numero :"
+cat $1 | sed -rn 's/<numero>(.+?)<\/numero>/\1/p' | sort | uniq -c | sort -bgr
+echo "Titre :"
+cat $1 | sed -rn 's/<titre>(.+?)<\/titre>/\1/p' | sort

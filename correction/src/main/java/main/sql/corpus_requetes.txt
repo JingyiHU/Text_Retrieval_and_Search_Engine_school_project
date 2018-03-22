@@ -1,0 +1,242 @@
+donner les titres articles traitant de sciences humaines et sociales
+combien d’articles sont parus en 2011 ?
+je veux des contacts pour Airbus
+l’article le plus récent sur les biocarburants
+les événemens autour de l’écollogie
+quelles sont les dernières innovations en robotique
+afficher les articles qui comporte un images
+les bulletins avant 2012 avec des articles sur l’aviation
+dans quelle rubrique parle-t-on le plus de l’université de Montpellier
+les 3 articles contenant le plus de fois le mot “innovation”
+je voudrais savoir combien il y a d’articles ayant un rapport avec l’environnement
+en quelle année y a-t-il eu le plus de parutions d’articles ?
+quels sont les domaines d’épplications des recherches en écologie
+le thème le plus récurrent parmi les articles parus à partir de 2000
+qu’est-ceque la déficience intellectuelle ?
+donne-moi les articles parlant de start-up
+artices  écrits par Jean-François Desessard et ayant au moins une image
+j’aurais voulu l’adresse mail du rédacteur qui a écrit le plus d’articles
+le plus vieil article sur l’aérospatiale
+affiche les contacts des articles sur la recherche universitaire
+Je veux les articles qui parlent de Zuckerberg.Je veux les articles qui ont été écrits en mai 2011.Afficher les articles de la rubrique “Focus”.Lister les articles qui contiennent des images au microscope.Afficher les articles qui parlent de 1995Je veux les avancées en biochimie de l’année 2011.Je veux les articles écrits par Laveissière contenant des images.Je voudrais les titres d’articles datant de 2012 et parlant de tempête.Je voudrais les dates des articles parlant de tsunamis et de Japon.Je voudrais les articles de la rubrique Focus parlant de ZuckerbergLister les articles parlant de biochimie et ne parlant pas d’enzymologie.Afficher les articles écrits entre mai 2011 et août 2011.Je voudrais les articles avec photo écrits en 2011 parlant d’enzimologie. Je souhaite trouver les titres d’articles sans image parlant de séismes ou de tsunamis.Trouve moi les articles comprenant une image d’éléphant ou de baleine.Lister les articles parlant de biochimie et ne parlant pas d’enzymologie.Afficher les articles écrits entre mai 2011 et août 2011.Je voudrais les articles avec photo écrits en 2011 parlant d’enzimologie. Je souhaite trouver les titres d’articles sans image parlant de séismes ou de tsunamis.Trouve moi les articles comprenant une image d’éléphant ou de baleine.Je souhaite obtenir les articles sur le thème des micro-organismes mais ne concernant pas les algues.
+Retrouve-moi les bulletins mentionnant de l’aéronautique datant de moins d’un an.
+Quels sont les articles écrits en 2011 par François Pierrot ?
+Quels sont les articles contient le mot “neurones” ?
+Donne-moi les articles du bulletain 259.
+Je veux savoir quels bulletins sont parus en 2012.
+Trouve moi le contact de l’article de Vincent Arondel.
+Combien y a-t-il d’articles dans la rubrique ‘En direct des laboratoires’?
+Quels sont les auteurs des articles du bulletin 279?
+Quels sont les articles parlant d’agriculture sans parler ni de tracteurs ni de pesticides.
+Immunologie et mouches drosophiles.
+Le mot “incongru” est cité dans combien d’articles?
+J’aimerais récupérer les articles parlant de lécole Centrale.
+Combien d’articles ont des images avec légende?
+Cite moi les articles parlant de philosophie parus entre 2012 et 2014.
+Je serais ravi d’obtenir les articles de 2011 dans la rubrique Focus.
+Je veux les articles qui parlent d’innovation et de la France dans la rubrique Focus ?
+Quel est le nombre d’articles dont le titre parle du climat ?
+Je veux l’article le plus ancien qui parle de robot ?
+Je vuex les articles qui parlent de chimie et dont le titre contient le mot molécule ?
+Affichez tous les numéros d’articles en 2013.
+Listez tous les artiles dans la rubirique Evénement et qui ont été écrit après 2014 ?
+Je veux savoir combien d’articles parlent d’économie numérique ?
+Je veux savoir combien d’articles sont écrits entre le 01/01/2014 et le 30/06/2014 ?
+Donnez-moi les articles qui parlent du prix nobel ou de l’alimentation durable ?
+J’aimerais savoir quels sont les articles dont le titre contient les mots technique et nanométrique ?
+Je veux chercher tous les titres d’articles qui sont écrits le 1/12/2011 ?
+Quel est le nombre d’articles sur la rubrique En direct des laboratoires ?
+Donnez-moi les articles qui parlent de la loi dite "Bataille" ?
+Je voudrais savoir tous les article qui concernent l’intelligence technolgique ?
+Je veux tous les articles sur la rubirique Evénement en 2011 sauf le mois janvier ?
+Je voudrais récupérer tous les articles qui sont datés entre le 20/06/2014 et le 20/08/2014 ?
+Listez- moi tous les articles qui parlent d’alimentation future sur la rubrique A lire ?
+Je voudrais savoir qui organise la Semaine de la Mémoire en 2014 ?
+Donnez-moi la date de l’article qui parle du forum à Grenoble ?
+Quels sont les articles qui parlent de fibres optique ?
+Afficher la liste des articles de la rubrique Evénement.
+Je veux le nombre d’article écrit entre 2012 et 2013.
+Articles parlant d'innovation.
+Je veux savoir quelle rubrique contient le plus d'articles sur "environnement".
+Existe-t-il des articles datant du 30/08/2011 ?
+Je désire l’article le plus récent.
+Je voudrais les articles dont la rubrique contient le mot innovation.
+Liste des articles écrits en Janvier 2013 qui contiennent au moins une image.
+Retourner les articles dont le numéro est 271.
+Combien de fois le mot innovation apparaît dans le texte d’un article dans la rubrique Focus ?
+Afficher les articles plus vieux que 2013.
+Trouve les articles contenant le mot chercheur et qui datent de 2009.
+Je veux les articles sur le développement industriel.
+Donne-moi les articles dont le numéro est pair.
+Les articles de la rubrique focus.
+Donne-moi les adresse mail des articles dont le numéro est 259.
+Affiche les images des articles concernant l’environnement.
+Faire la liste des articles écrit par Nicolas Gilles.
+Article du fichier 72633.
+Je veux tous les articles du mois de juillet.
+Donner les numéros de articles de la rubrique 'Événement'.
+Donner les articles qui parle de 'Prix nobel'
+Donner les articles qui parle d'«ingénieri»
+Quels sont les articles qui parlent d'événements qui se sont passés en 2015?
+Quels sont les articles qui parlent d'économie?
+Donner les articles parlant de 'bactéri'
+Donner les articles ayant pour contact 'Lagarde'
+Donner les articles liés à l'Ecole Polytechnique.
+Donner les articles parus en 2011.
+Quels sont les articles qui parlent de 'contrat' ?
+Donnes moi les articles qui parlent de nacre artificielle ainsi que de matérieux.
+Je veux les articles à propos de start-up
+Je souhaiterais les bulletins sur l’ariculture
+J’aimerais les textes sur les antioxydants de l’année 2014
+Je veux les articles dont les titres contiennent le mot mémoire
+Donnez moi les articles sur le diabète
+Donnes moi les articles où les chercheurs de l’INRIA sont cités.
+Quels sont les articles sur l’innovation ?
+Quels sont les articles sur l’Eurpe et l’energie ?
+Donnez les articles publiés entre 2014 et 2015 sur le cancer
+J’aimerais les articles avec images qui parlent d’économie et ne sont pas dans la rubrque Focus
+Donne-moi le nombres d’articles de catégorie Focus publiés entre 2010 et 2012.
+affiche tous les auteurs qui ont publié 2 articles en 2014
+je veux l'article le plus court.
+quel auteur a eecrit le plus d'articles ?
+donne-moi le mot qui a apparu le plus souvent dans les titres après 2013
+Combien d'articles parlent de la chine
+Je voudrais les articles évoquant l'innovation qui ne sont pas dans la rubrique Actualité Innovation 
+Combien d'auteurs ont publié l'article en janvier 2011 dans la rubrique Au coeur des régions?
+je veux chercher les articles dont le numéro est 288 et le titre contient Réalité virtuelle
+Liste-moi les contacts au sujet de robots en 2013
+Quels sont les articles sans image sur l'informatique publiés entre Mars 2013 et Juin 2013.
+Puis-je savoir quels sont les auteurs qui ont écrit au moins un article dans la rubrique Actualité Innovation
+De quand date l'article le plus ancien
+Je recherche les articles publiés entre 2010 et 2015
+le nombre d'images pour les articles de la rubrique Focus
+les gros titres des articles en 2010 dans la rubrique Focus
+je souhaite avoir les articles qui parlent de l'agriculture et qui sont aussi dans la rubrique Actualité Innovation et qui ont au moins une image
+Quels sont les dates de publication des articles sur le sujet "économie" en 2012
+Combien d'images y a t'il dans les articles publiés en 2010
+Quels sont les articles dont le nom contient le mot <X> ?
+Quels auteurs ont écrit des articles parlant de <X> ?
+Quels sont les bulletin qui parlent de <X> ?
+Quand les articles parlant de <X> ont-ils été publiés ?
+Quels sont les articles rédigés par <X> ?
+Quels sont les articles du bulletin numéro <X> ?
+Quels articles parlant de <X> ont été publiés depuis <Y> ?
+Quels images correspondent aux articles qui parlent de <X> ?
+Y-a-t'il des articles parlant de <X> et <Y> ?
+De quoi parle le plus vieil article ?
+Quelle est la liste des urls des images concernant <X> ?
+Quels sont les titres des articles parlant de <X>
+Quel est le nombre d'articles de la rubrique Focus?
+Combien de titres contiennent le mot physique?
+Je voudrais des articles écrits après 2011.
+Je veux les articles liés à l'environnement.
+Combien d'articles possèdent 2 images?
+Les articles de la rubrique Actualité Innovation.
+Je veux les bulletins qui ont l'adresse email dans le contact.
+Quel est le nombre de bulletins dont le numéro est inférieur à 260?
+Je veux tous les urls des images.
+Afficher les légendes des images qui sont au sujet du robot?
+Je veux trouver les articles écrits en 2011, 2012 et 2014.
+Je voudrais les identifiants des articles liés à l'université et à l'école.
+Je voudrais l'article le plus récent.
+Y a-t-il des bulletins publié au premier trimestre de 2011?
+Je voudrais avoir le nombre de rubriques.
+Rechercher les articles de la rubrique Focus qui sont sur la technologie.
+J'aimerais un article qui est écrit en 2012 et qui a le plus numéro.
+Listez-moi les bulletins qui ont le plus petit numéro.
+Quelle est la rubrique le plus commuunne.
+Combien d'article est écrit entre le 01 janvier 2011 et 31 mars 2011?
+Donnez-moi tous les articles qui ont pour rubrique Événement et qui parle d'inauguration.
+Je veux tous les articles datant de l'hiver 2012.
+Affichez-moi les rubriques des articles possédant au moins une photo.
+Listez-moi les articles ayant le mot solution dans leur titre.
+Je veux le sujets des articles ayant comme contact Biocitech.
+Quels sont les articles ayant une question comme titre.
+Je veux les articles utilisant le mot Etat-Unis ou tout autre synonyme au moins deux fois.
+Quels sont les articles lié à la ville de Paris ?
+Combien d'articles y a-t-il dans la rubrique au coeur des régions ?
+Quelle est la ville la plus citée dans ce corpus ?
+Quelle date possède le plus d'articles ?
+Quelle rubrique est lié aux articles parlant de bactéries ?
+En quelle année y avait-il le plus grand nombre d'article parlant de forêt ?
+Le corpus possède t-il plus d'article sur la réalité virtuelle ou sur le développement durable ?
+Quel mot long, d'au moins 8 lettres, est le plus cité dans ce corpus ?
+Listez les article parlant de première mondiale dans leur titre.
+Quelle rubrique possède le plus d'articles ?
+Quelle est la proportionnalité d'article parlant du CNRS dans ce corpus ?
+Je souhaite avoir le titre des articles parlant de technologie.
+Affichez-moi les dates des articles parlant de Google.
+Je veux les articles sur "environnement" ou "innovation" sans "gouvernement".
+Listez-moi l’ensemble des articles qui ont pour rubrique « Focus ».
+Je veux les articles qui parlent de « l’innovation ».
+Donnez-moi les articles qui ont été publiés le 26/04/12.
+Afficher la liste des auteurs qui ont écris des articles sur la biologie.
+Je cherche les articles dont le titre contient le mot réalité.
+Qui dois-je contacter si je veux parler de AgroParisTech ?
+J’aimerais avoir des articles qui parlent d’avions.
+Quels sont les articles qui traitent de robotique et qui sont publiés en 2012 ou 2011 ?
+Je veux la liste des articles dont le résumé contient le mot France
+Lister les articles dont le contact est Mathias Fink
+Article Titre Physique
+Je veux les images des articles contenant le mot microbe.
+Je veux les articles dont le mot robot et present dans l’une des légendes d’une de ces images
+Je veux les articles des numéros 200  à 300 inclus. Je souhaiterais obtenir l’article le plus court qui parlent de la France.
+Combien d’articles parlent de la France ?
+Je veux savoir à quelle date le plus d'articles sont publiés en 2014.
+Quel auteur a rédigé le plus d’articles ?
+Je veux tous les articles de 2013.
+J’ai besoin de tous les articles qui parlent d’économie stp.
+Je cherche 10 articles sur l’innovation.
+Affiche-moi les articles qui contiennent des actualités.
+Combien d’articles peux-tu me retourner ?
+Retourne moi tous les articles qui contiennent plus de 2 images.
+Je voudrais tous les articles qui ne datent pas de 2015.
+Je voudrais savoir le nombre d’articles oubliés chaque année.
+Quel est le bulletin le plus riche ?
+Retourne-moi tous les différentes rubriques !
+Je voudrais trouver l’article le plus récent.
+Je voudrais tous les articles du bulletin numéro 260.
+Je voudrais tous les articles qui contiennent le mot « alice » mais pas « nanotechnologie ».
+Y a-t-il des articles qui contiennent des mots qui commencent par « nano » ?
+On voudrait trouver les articles ou le mot « création » est présent.
+Je veux tous les articles de 2013 à 2014.
+Quel sont les derniers atricles de chaque auteur ayant déjà écrit dans la rubrique Focus ?
+Quelle est la rubrique dans laquelle la moyenne des articles écrit par auteur est inférieure à 5
+Quels sont les auteurs ayant écrit dans la rubrique Actaulités entre le 25 janvier et le 15 mars 2016 ?
+Quelle est la rubrique contenant le plus vieil article ?
+Quel est l'article le plus récent dans la rubrique qui compte le plus grand nombre d'articles ?
+Quels sont tous les articles écrits parlant de X mais pas de Y
+Quel est le dernier article de l'autur ayant écrit le plus grand nombre d'article en 2015 ?
+Quels sont les articles de la rubrique Horizons parlant de programme erasmus ?
+Quels sont tous les articles parlant d'intelligence artificielle et ayant été écrit en 2012 ou en 2014 ? 
+Quels sont tous les articles écrit par l'auteur Laure Colasse entre 2011 et 2016 ?
+Quel est l’article le plus volumineux de la rubrique évènement? 
+Lister les article d’Antoine Royant écrit après février 2011? 
+Quels sont les bulletin contenant un article du contact Virginie Chamart? 
+Quel est nombre moyen de rubrique par bulletin? 
+Quel est le numéro de bulletin et la rubrique de l’article parlan du robot Hercule? 
+Trouver les articles du bulletin 263 contenant une image mais pas de légende
+Donner l’article le plus récent qui parle de chirurgie et qui ne soit pas dans la rubrique Focus
+Nombre d’article de la rubrique « Du coté des pôles » publié en octobre 2013
+Longueur moyenne des titres des articles de janvier 2014
+Donnez la fréquence moyenne de publication d’un article de rubrique Actualités innovations
+Quel est le nombre de documents qui contient le mot recherche et environement?
+Combien d'articles sont écrites le 21/06/2011?
+Qui a écrit le plus d’articles en 2011?
+Combien d'acticle s'agit de l'environement?
+Combien de personnes apparaissent dans le contact?
+Combien de personnes apparaissent dans le contact?
+Quels sont les articles qui citent Lafarge et Saint-Gobain?
+Indiquer le numéro des articles qui parlent de l'europe.
+Je voudrais les articles qui parlent d’environement.
+On s'intéresse à tous les informations en concernant les rubriques : Evénement, Focus, Actualité Innovation.
+quelles sont les date des articles qui contient le mot environement.
+Donnez-moi la date qui apparaît le plus.
+Compter le nombre d’article qui est associé à l'environnement.
+Lister toutes les images dans le corpus?
+Lister toutes les images qui apparaissent dans les articles qui contiennnet le mot environnement?
+Je cherche la derniere article qui parlent de microprocesseurs.
+Je prends tous les numéros de téléphone qui s'agit de Julien Watelet.
+Je cherche les adresses e-mail sous format "@.*\.fr".
+Je voudrais les articles sans images.
+Je voudrais les articles avant 2012.
