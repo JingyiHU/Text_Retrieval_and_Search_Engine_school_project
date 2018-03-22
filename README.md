@@ -2,7 +2,7 @@
 
 # Introduction
 
-LO17 course at University of Technology of Compiegne, France.
+Course at University of Technology of Compiegne, France.
 
 Link : http://www4.utc.fr/~lo17/
 
